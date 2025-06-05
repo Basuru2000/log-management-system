@@ -1,0 +1,421 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Log Management - Dashboard</title>-->
+<!--    <style>-->
+<!--        /* General Styles */-->
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            background-color: #f5f5f5;-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        /* Dashboard Header */-->
+<!--        .dashboard-header {-->
+<!--            background-color: #4a5568;-->
+<!--            color: white;-->
+<!--            padding: 20px 30px;-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .dashboard-header h1 {-->
+<!--            font-size: 24px;-->
+<!--            font-weight: 500;-->
+<!--        }-->
+
+<!--        .header-actions {-->
+<!--            display: flex;-->
+<!--            gap: 10px;-->
+<!--        }-->
+
+<!--        .btn {-->
+<!--            padding: 8px 16px;-->
+<!--            border: none;-->
+<!--            border-radius: 5px;-->
+<!--            text-decoration: none;-->
+<!--            cursor: pointer;-->
+<!--            font-size: 14px;-->
+<!--            font-weight: 500;-->
+<!--            transition: all 0.3s;-->
+<!--            display: inline-block;-->
+<!--        }-->
+
+<!--        .btn-primary {-->
+<!--            background-color: #4a90e2;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .btn-primary:hover {-->
+<!--            background-color: #357abd;-->
+<!--        }-->
+
+<!--        .btn-secondary {-->
+<!--            background-color: #718096;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .btn-secondary:hover {-->
+<!--            background-color: #4a5568;-->
+<!--        }-->
+
+<!--        /* Dashboard Main */-->
+<!--        .dashboard-main {-->
+<!--            padding: 30px;-->
+<!--            max-width: 1200px;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
+
+<!--        .folders-container {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));-->
+<!--            gap: 20px;-->
+<!--        }-->
+
+<!--        .folder-card {-->
+<!--            background: white;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);-->
+<!--            overflow: hidden;-->
+<!--            transition: transform 0.3s, box-shadow 0.3s;-->
+<!--        }-->
+
+<!--        .folder-card:hover {-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);-->
+<!--        }-->
+
+<!--        .folder-header {-->
+<!--            background-color: #4a5568;-->
+<!--            color: white;-->
+<!--            padding: 15px 20px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .folder-header h3 {-->
+<!--            font-size: 18px;-->
+<!--            font-weight: 500;-->
+<!--        }-->
+
+<!--        .folder-actions {-->
+<!--            padding: 20px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        /* Error Message Styles */-->
+<!--        .error-message {-->
+<!--            background-color: #fed7d7;-->
+<!--            color: #c53030;-->
+<!--            padding: 12px 16px;-->
+<!--            border-radius: 5px;-->
+<!--            margin-bottom: 20px;-->
+<!--            border-left: 4px solid #c53030;-->
+<!--        }-->
+
+<!--        /* Responsive Design */-->
+<!--        @media (max-width: 768px) {-->
+<!--            .dashboard-header {-->
+<!--                flex-direction: column;-->
+<!--                gap: 15px;-->
+<!--                text-align: center;-->
+<!--            }-->
+
+<!--            .header-actions {-->
+<!--                justify-content: center;-->
+<!--            }-->
+
+<!--            .dashboard-main {-->
+<!--                padding: 20px;-->
+<!--            }-->
+
+<!--            .folders-container {-->
+<!--                grid-template-columns: 1fr;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header class="dashboard-header">-->
+<!--    <h1>Log Management</h1>-->
+<!--    <div class="header-actions">-->
+<!--        <button class="btn btn-primary">Upload</button>-->
+<!--        <a th:href="@{/logout}" class="btn btn-secondary">Logout</a>-->
+<!--    </div>-->
+<!--</header>-->
+
+<!--<main class="dashboard-main">-->
+<!--    <div th:if="${error}" class="error-message" th:text="${error}"></div>-->
+
+<!--    <div class="folders-container">-->
+<!--        <div th:each="folder : ${folders}" class="folder-card">-->
+<!--            <div class="folder-header">-->
+<!--                <h3 th:text="${folder}"></h3>-->
+<!--            </div>-->
+<!--            <div class="folder-actions">-->
+<!--                <a th:href="@{'/folder/' + ${folder}}" class="btn btn-primary">View Files</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--<script>-->
+<!--    // Auto-hide error messages after 5 seconds-->
+<!--    document.addEventListener('DOMContentLoaded', function() {-->
+<!--        const errorMessages = document.querySelectorAll('.error-message');-->
+<!--        errorMessages.forEach(function(message) {-->
+<!--            setTimeout(function() {-->
+<!--                message.style.opacity = '0';-->
+<!--                setTimeout(function() {-->
+<!--                    message.style.display = 'none';-->
+<!--                }, 300);-->
+<!--            }, 5000);-->
+<!--        });-->
+<!--    });-->
+
+<!--    // Add click handler for upload button-->
+<!--    document.querySelector('.btn-primary').addEventListener('click', function() {-->
+<!--        alert('Upload functionality would be implemented here');-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Management - Dashboard</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-header {
+            background-color: #4a5568;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-header h1 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #357abd;
+        }
+
+        .btn-secondary {
+            background-color: #718096;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4a5568;
+        }
+
+        .dashboard-main {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .folders-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .folder-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .folder-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .folder-header {
+            background-color: #4a5568;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        .folder-header h3 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .folder-actions {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Error and Success Message Styles */
+        .error-message {
+            background-color: #fed7d7;
+            color: #c53030;
+            padding: 12px 16px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c53030;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px 16px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+        }
+
+        /* Upload Form Styles */
+        .upload-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .upload-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .upload-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .upload-form select,
+        .upload-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-actions {
+                justify-content: center;
+            }
+
+            .dashboard-main {
+                padding: 20px;
+            }
+
+            .folders-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="dashboard-header">
+    <h1>Log Management</h1>
+    <div class="header-actions">
+        <button class="btn btn-primary" onclick="document.getElementById('upload-form').style.display='block'">Upload</button>
+        <a th:href="@{/logout}" class="btn btn-secondary">Logout</a>
+    </div>
+</header>
+
+<main class="dashboard-main">
+    <div th:if="${error}" class="error-message" th:text="${error}"></div>
+    <div th:if="${message}" class="success-message" th:text="${message}"></div>
+
+    <div id="upload-form" style="display:none; margin-bottom: 20px;">
+        <form th:action="@{/upload}" method="post" enctype="multipart/form-data" class="upload-form">
+            <div class="form-group">
+                <label for="basePath">Select Base Path</label>
+                <select id="basePath" name="basePath" required>
+                    <option th:each="path : ${basePaths}" th:value="${path}" th:text="${path}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="folder">Select Folder</label>
+                <select id="folder" name="folder" required>
+                    <option th:each="folder : ${folders}" th:value="${folder}" th:text="${folder}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file">Select File</label>
+                <input type="file" id="file" name="file" accept=".zip" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+
+    <div class="folders-container">
+        <div th:each="folder : ${folders}" class="folder-card">
+            <div class="folder-header">
+                <h3 th:text="${folder}"></h3>
+            </div>
+            <div class="folder-actions">
+                <a th:href="@{'/folder/' + ${folder}}" class="btn btn-primary">View Files</a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
